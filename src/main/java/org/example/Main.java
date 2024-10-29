@@ -1,17 +1,40 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        // Definir las credenciales correctas y el número máximo de intentos
+        final String usuarioCorrecto = "admin";
+        final String contraseñaCorrecta = "1234";
+        int intentos = 3;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        // Crear el objeto Scanner para capturar la entrada del usuario
+        Scanner scanner = new Scanner(System.in);
+
+        // Bucle para permitir hasta 3 intentos de autenticación
+        while (intentos > 0) {
+            System.out.print("Ingresa tu usuario: ");
+            String usuario = scanner.nextLine();
+
+            System.out.print("Ingresa tu contraseña: ");
+            String contraseña = scanner.nextLine();
+
+            // Verificar si las credenciales son correctas
+            if (usuario.equals(usuarioCorrecto) && contraseña.equals(contraseñaCorrecta)) {
+                System.out.println("¡Bienvenido!");
+                break;  // Salir del bucle si la autenticación es exitosa
+            } else {
+                intentos--;  // Reducir el número de intentos restantes
+                System.out.println("Nombre o Contraseña incorrectos. Intentos restantes: " + intentos);
+
+                if (intentos == 0) {
+                    System.out.println("Ha excedido el número máximo de intentos. Acceso denegado.");
+                }
+            }
         }
+
+        // Cerrar el scanner para liberar recursos
+        scanner.close();
     }
 }
